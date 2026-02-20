@@ -1,0 +1,257 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f1117;
+  --card: #161921;
+  --card2: #1c2029;
+  --border: #252a35;
+  --border2: #2f3542;
+  --text: #E5D5C5;
+  --muted: #9CA3AF;
+  --dim: #7B8494;
+  --warm: #D4A574;
+  --green: #7EB8A2;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--warm);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container.narrow {
+  max-width: 680px;
+}
+
+/* Header */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--warm);
+  letter-spacing: -0.3px;
+}
+
+.logo a {
+  color: var(--warm);
+}
+
+nav a {
+  color: var(--dim);
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Hero */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+.hero .tagline {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--warm);
+  color: var(--bg);
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+/* Features */
+.features {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+}
+
+.features .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+}
+
+.feature {
+  text-align: center;
+}
+
+.feature-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.feature h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.feature p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Honest section */
+.honest {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.honest h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.honest p {
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 16px;
+}
+
+/* Privacy note */
+.privacy-note {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  background: var(--card);
+}
+
+.privacy-note h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: var(--green);
+}
+
+.privacy-note p {
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+/* Download */
+.download {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.download h2 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.download p {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.app-store-badge {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  color: var(--dim);
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Privacy page */
+.page {
+  padding: 60px 0 100px;
+}
+
+.page h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.page .updated {
+  color: var(--dim);
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin-bottom: 40px;
+}
+
+.page h2 {
+  font-size: 18px;
+  color: var(--warm);
+  margin: 32px 0 8px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.page p {
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+}
+
+footer p {
+  color: var(--dim);
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: center;
+}
