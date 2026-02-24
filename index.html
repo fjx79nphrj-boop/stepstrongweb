@@ -145,31 +145,49 @@
     }
     #problem p:last-child { margin-bottom: 0; }
 
-    /* ── Features ── */
+    /* ── Features / Screenshots ── */
     #how h2 {
       font-size: clamp(22px, 4.5vw, 32px);
-      margin-bottom: 28px;
+      margin-bottom: 36px;
     }
-    .feat-grid {
+    .screens-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 10px;
+      gap: 48px;
     }
-    .feat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 20px;
+    .screen-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-    .feat-card h3 {
-      font-size: 15px;
-      font-weight: 600;
+    .phone-wrap {
+      width: 100%;
+      max-width: 230px;
+      border-radius: 40px;
+      border: 2px solid var(--border2);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03);
+      overflow: hidden;
+      background: #09090d;
+      margin-bottom: 20px;
+    }
+    .phone-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .screen-item h3 {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      color: var(--text);
+      line-height: 1.3;
       margin-bottom: 8px;
     }
-    .feat-card p {
+    .screen-item p {
       font-size: 14px;
       color: var(--muted);
       line-height: 1.65;
+      max-width: 280px;
     }
 
     /* ── Science ── */
@@ -350,8 +368,12 @@
     footer a:hover { color: var(--warm); text-decoration: none; }
 
     /* ── Responsive ── */
-    @media (min-width: 520px) {
-      .feat-grid { grid-template-columns: 1fr 1fr; }
+    @media (min-width: 680px) {
+      .screens-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 28px;
+        align-items: start;
+      }
     }
 
     @media (max-width: 520px) {
@@ -407,23 +429,32 @@
     <div class="w">
       <p class="lbl">How it works</p>
       <h2>Quick to log. Months to understand.</h2>
-      <div class="feat-grid">
-        <div class="feat-card">
-          <h3>Log what happened</h3>
-          <p>Thirty seconds after an interaction — what you did, how they responded. A quiet act of service. A direct conversation. Withdrawal. Rejection. It all counts, and it's all captured.</p>
+      <div class="screens-grid">
+
+        <div class="screen-item">
+          <div class="phone-wrap">
+            <img src="Home.png" alt="StepStrong home screen showing daily quote, log button, and recent entries" />
+          </div>
+          <h3>Log daily. Watch it accumulate.</h3>
+          <p>Quick logging — what you did, how they responded. Stats build over time so you can see whether anything is shifting across hundreds of interactions.</p>
         </div>
-        <div class="feat-card">
-          <h3>See what's working</h3>
-          <p>Over weeks, patterns emerge. Which approaches land. Which contexts trigger loyalty conflict. Data specific to your child — not population averages.</p>
+
+        <div class="screen-item">
+          <div class="phone-wrap">
+            <img src="Timeline.png" alt="Timeline showing emotional tone over six months as a bar chart" />
+          </div>
+          <h3>Patterns emerge over months.</h3>
+          <p>The timeline shows daily emotional tone over weeks and months. Which approaches land. Which contexts produce friction. Specific to your child — not population averages.</p>
         </div>
-        <div class="feat-card">
-          <h3>Shift perspective when it's hard</h3>
-          <p>When you log a rejection, the app surfaces research-backed reframes and real quotes from adult stepchildren reflecting on what their stepparent's quiet effort meant — years later.</p>
+
+        <div class="screen-item">
+          <div class="phone-wrap">
+            <img src="Perspective_detail.png" alt="Perspective card explaining the loyalty bind with a firsthand stepchild account" />
+          </div>
+          <h3>Reframes when rejection hits.</h3>
+          <p>Research-backed cards explain the why behind difficult behaviour — with firsthand accounts from adult stepchildren on what was really happening when they pulled away.</p>
         </div>
-        <div class="feat-card">
-          <h3>See the arc, not just today</h3>
-          <p>Monthly snapshots track how the relationship feels over time. A hard week sits inside months of gradual movement. The data shows you the arc when you can't feel it.</p>
-        </div>
+
       </div>
     </div>
   </section>
