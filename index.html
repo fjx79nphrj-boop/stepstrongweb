@@ -3,85 +3,609 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StepStrong — Track your stepfamily journey</title>
-  <meta name="description" content="StepStrong helps stepparents track interactions, see patterns, and stay grounded through one of the hardest relationships there is." />
-  <link rel="stylesheet" href="styles.css" />
+  <title>StepStrong — Track what you can't see</title>
+  <meta name="description" content="StepStrong is the first private tool for stepparents that makes invisible progress visible. No account. Your data stays on your device. Free." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0f1117;
+      --card:    #161921;
+      --card2:   #1c2029;
+      --border:  #252a35;
+      --border2: #2f3542;
+      --text:    #E5D5C5;
+      --muted:   #9CA3AF;
+      --dim:     #7B8494;
+      --warm:    #D4A574;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--warm); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .w {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .w-wide {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── Section base ── */
+    .sec {
+      padding: 68px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Label ── */
+    .lbl {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 14px;
+    }
+
+    /* ── Headings ── */
+    h1, h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--text);
+      line-height: 1.22;
+      letter-spacing: -0.3px;
+    }
+    h3 {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .hdr-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--warm);
+    }
+    header nav a {
+      color: var(--dim);
+      font-size: 13px;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      padding: 76px 0 68px;
+    }
+    #hero h1 {
+      font-size: clamp(28px, 6.5vw, 44px);
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--warm);
+      color: #0f1117;
+      padding: 15px 38px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.1px;
+      transition: opacity 0.18s;
+    }
+    .cta-btn:hover { opacity: 0.86; text-decoration: none; }
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      margin-top: 16px;
+    }
+    .trust-row span {
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    /* ── Problem ── */
+    #problem h2 {
+      font-size: clamp(22px, 4.5vw, 32px);
+      margin-bottom: 18px;
+    }
+    #problem p {
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+    #problem p:last-child { margin-bottom: 0; }
+
+    /* ── Features ── */
+    #how h2 {
+      font-size: clamp(22px, 4.5vw, 32px);
+      margin-bottom: 28px;
+    }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .feat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+    .feat-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feat-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Science ── */
+    #science h2 {
+      font-size: clamp(22px, 4.5vw, 32px);
+      margin-bottom: 28px;
+    }
+    .sci-list {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .sci-item {
+      padding-left: 18px;
+      border-left: 2px solid var(--border2);
+    }
+    .sci-item strong {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 16px;
+      color: var(--text);
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+    .sci-item p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Quotes ── */
+    #voices h2 {
+      font-size: clamp(22px, 4.5vw, 32px);
+      margin-bottom: 10px;
+    }
+    .voices-intro {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+    .q-card {
+      border-left: 3px solid var(--warm);
+      background: var(--card2);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 20px 16px 20px;
+      margin-bottom: 12px;
+    }
+    .q-card blockquote {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .q-attr {
+      font-size: 12px;
+      color: var(--warm);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Stepdads ── */
+    #stepdads {
+      background: var(--card);
+    }
+    #stepdads h2 {
+      font-size: clamp(22px, 4.5vw, 32px);
+      margin-bottom: 16px;
+    }
+    #stepdads p {
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+    #stepdads p:last-child { margin-bottom: 0; }
+
+    /* ── Privacy trust ── */
+    #priv-trust h2 {
+      font-size: clamp(20px, 4vw, 28px);
+      margin-bottom: 24px;
+    }
+    .priv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .priv-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 16px;
+    }
+    .priv-card strong {
+      display: block;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .priv-card p {
+      font-size: 13px;
+      color: var(--dim);
+      line-height: 1.55;
+    }
+    .priv-note {
+      font-size: 14px;
+      color: var(--dim);
+      line-height: 1.65;
+    }
+
+    /* ── Bottom CTA ── */
+    #bottom-cta {
+      text-align: center;
+    }
+    #bottom-cta h2 {
+      font-size: clamp(24px, 5vw, 36px);
+      margin-bottom: 14px;
+    }
+    #bottom-cta .sub {
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .closing {
+      margin-top: 28px;
+      font-family: Georgia, serif;
+      font-style: italic;
+      color: var(--dim);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Privacy policy ── */
+    #privacy-policy {
+      background: #0c0e13;
+    }
+    #privacy-policy h2 {
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+    .pp-date {
+      font-size: 12px;
+      color: var(--dim);
+      margin-bottom: 32px;
+    }
+    #privacy-policy h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--warm);
+      margin: 26px 0 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    #privacy-policy p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 0;
+    }
+    .ftr-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    footer p, footer a {
+      font-size: 13px;
+      color: var(--dim);
+    }
+    footer a:hover { color: var(--warm); text-decoration: none; }
+
+    /* ── Responsive ── */
+    @media (min-width: 520px) {
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .sec { padding: 52px 0; }
+      #hero { padding: 56px 0 52px; }
+      .priv-grid { grid-template-columns: 1fr; }
+      .ftr-inner { flex-direction: column; align-items: flex-start; }
+      #bottom-cta .trust-row { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="container">
+
+<header>
+  <div class="w-wide">
+    <div class="hdr-inner">
       <div class="logo">StepStrong</div>
-      <nav>
-        <a href="privacy.html">Privacy</a>
-      </nav>
+      <nav><a href="#privacy-policy">Privacy</a></nav>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>Your progress is real,<br>even when it's invisible.</h1>
-        <p class="tagline">StepStrong helps stepparents track interactions with a resistant stepchild — so you can see whether your efforts are producing change, even when it doesn't feel like it.</p>
-        <a href="#download" class="btn">Download on the App Store</a>
+<main>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="w">
+      <p class="lbl">Free · No account needed · iOS</p>
+      <h1>You've been doing this for years. You can't tell if any of it makes a difference.</h1>
+      <p class="hero-sub">StepStrong is the first private tool for stepparents that makes invisible progress visible — logging interactions, tracking patterns, and showing you what's actually working over time with your specific child.</p>
+      <a href="#app" class="cta-btn">Try it free</a>
+      <div class="trust-row">
+        <span>No account needed</span>
+        <span>Your data stays on your device</span>
+        <span>Free to start</span>
       </div>
-    </section>
-
-    <section class="features">
-      <div class="container">
-        <div class="feature">
-          <div class="feature-icon">📋</div>
-          <h3>Log interactions</h3>
-          <p>Record what you did, how they responded, and the context. Small moments matter. Capture them before they fade.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">📈</div>
-          <h3>See patterns</h3>
-          <p>Which approaches work best? Which contexts produce more friction? Data shows what feelings can't.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🔄</div>
-          <h3>Shift perspective</h3>
-          <p>Research-backed reframes for when things feel heavy. Not platitudes — real perspectives from adult stepchildren looking back.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">📊</div>
-          <h3>Track progress over time</h3>
-          <p>Monthly snapshots show where things stand. A difficult stretch doesn't erase progress — the data proves it.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="honest">
-      <div class="container">
-        <h2>An honest app for a hard journey</h2>
-        <p>The path to a functional relationship with a resistant stepchild typically takes 7 to 12 years. No app will change that timeline.</p>
-        <p>What StepStrong does is make the invisible visible — so you don't abandon what's working, and you don't burn out from effort that feels unseen.</p>
-      </div>
-    </section>
-
-    <section class="privacy-note">
-      <div class="container">
-        <h2>Your data stays on your device</h2>
-        <p>Everything you log is stored locally on your phone. No account, no login, no cloud sync. Your journal is yours.</p>
-        <a href="privacy.html">Read the privacy policy</a>
-      </div>
-    </section>
-
-    <section class="download" id="download">
-      <div class="container">
-        <h2>Available on iOS</h2>
-        <p>Coming soon to the App Store.</p>
-        <!-- Replace with actual App Store link when live -->
-        <!-- <a href="https://apps.apple.com/app/stepstrong/idXXXXXXXXX" class="btn">Download on the App Store</a> -->
-        <div class="app-store-badge">App Store link coming soon</div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 StepStrong. <a href="privacy.html">Privacy Policy</a></p>
     </div>
-  </footer>
+  </section>
+
+  <!-- ── Problem ── -->
+  <section id="problem" class="sec">
+    <div class="w">
+      <p class="lbl">The problem</p>
+      <h2>Every tool for stepparents tracks the wrong thing.</h2>
+      <p>Every app for blended families is a co-parenting logistics tool — custody calendars, scheduling with the other parent, expense splitting. They exist to manage the business of shared parenting.</p>
+      <p>None of them address what actually makes stepparenting hard: the relationship itself. The sustained, invisible effort. The consistent care that gets no feedback. The slow erosion that sets in when you can't tell whether anything you do is landing.</p>
+      <p>StepStrong is the first tool built for that experience.</p>
+    </div>
+  </section>
+
+  <!-- ── How It Works ── -->
+  <section id="how" class="sec">
+    <div class="w">
+      <p class="lbl">How it works</p>
+      <h2>Quick to log. Months to understand.</h2>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <h3>Log what happened</h3>
+          <p>Thirty seconds after an interaction — what you did, how they responded. A quiet act of service. A direct conversation. Withdrawal. Rejection. It all counts, and it's all captured.</p>
+        </div>
+        <div class="feat-card">
+          <h3>See what's working</h3>
+          <p>Over weeks, patterns emerge. Which approaches land. Which contexts trigger loyalty conflict. Data specific to your child — not population averages.</p>
+        </div>
+        <div class="feat-card">
+          <h3>Shift perspective when it's hard</h3>
+          <p>When you log a rejection, the app surfaces research-backed reframes and real quotes from adult stepchildren reflecting on what their stepparent's quiet effort meant — years later.</p>
+        </div>
+        <div class="feat-card">
+          <h3>See the arc, not just today</h3>
+          <p>Monthly snapshots track how the relationship feels over time. A hard week sits inside months of gradual movement. The data shows you the arc when you can't feel it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Science ── -->
+  <section id="science" class="sec">
+    <div class="w">
+      <p class="lbl">What the research says</p>
+      <h2>The timeline is longer than anyone told you.</h2>
+      <div class="sci-list">
+        <div class="sci-item">
+          <strong>Full integration takes 7–12 years.</strong>
+          <p>Braithwaite et al.'s longitudinal research found that stepfamily integration — not warmth, not closeness, just functional integration — typically takes 7–12 years. Most stepparents declare failure at year two.</p>
+        </div>
+        <div class="sci-item">
+          <strong>Neutral acceptance is a milestone, not a failure.</strong>
+          <p>Researchers identify "neutral acceptance" as a distinct, positive phase in stepfamily development. It is not the goal falling short — it is a stage on the path. Most stepparents don't know it has a name.</p>
+        </div>
+        <div class="sci-item">
+          <strong>Negativity bias distorts your read of the relationship.</strong>
+          <p>The brain weights negative interactions 3–5× more heavily than positive ones. One rejection dominates a week of small positives. Logging corrects for this — it shows you the actual ratio.</p>
+        </div>
+        <div class="sci-item">
+          <strong>The quiet acts are what they remember.</strong>
+          <p>Adult stepchildren consistently describe not grand gestures but specific, quiet, repeated acts as what shaped their view of their stepparent. The things that felt invisible to you were often what registered most.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Voices ── -->
+  <section id="voices" class="sec">
+    <div class="w">
+      <p class="lbl">Real voices</p>
+      <h2>Adult stepchildren, looking back.</h2>
+      <p class="voices-intro">These are not hypotheticals. This is what the people you're trying to reach say about the effort their stepparent kept making — once they were old enough to say it.</p>
+
+      <div class="q-card">
+        <blockquote>"He never tried to be my dad. He just kept showing up. Drove me places. Fixed things. Asked how school was, even when I gave one-word answers for three years straight. I didn't appreciate it until I was 25."</blockquote>
+        <p class="q-attr">— Adult stepchild</p>
+      </div>
+
+      <div class="q-card">
+        <blockquote>"My car broke down on a highway at 2 AM. I called him because my phone was dying. He came in 40 minutes. Didn't lecture me. Just fixed the issue and waited till I got home. He said, 'I know I'm not your first call. I just want to be a reliable one.'"</blockquote>
+        <p class="q-attr">— Adult stepchild</p>
+      </div>
+
+      <div class="q-card">
+        <blockquote>"She stopped trying to bond. But she still left medicine on my bedside when I was sick. Still paid my college application fees quietly. On my first job interview day, she ironed my shirt and said nothing else. That hurt more than any argument."</blockquote>
+        <p class="q-attr">— Adult stepchild</p>
+      </div>
+
+      <div class="q-card">
+        <blockquote>"I used to test her constantly. Say horrible things just to see if she'd leave. She never did. That's the only reason I trust anyone now."</blockquote>
+        <p class="q-attr">— Adult stepchild</p>
+      </div>
+
+      <div class="q-card">
+        <blockquote>"I wish someone had told my stepdad that my silence wasn't rejection. I was just scared that if I loved him, it meant I didn't love my dad anymore."</blockquote>
+        <p class="q-attr">— Adult stepchild</p>
+      </div>
+
+      <div class="q-card">
+        <blockquote>"When I got married, I asked my stepdad to walk me down the aisle. He had waited seventeen years for that moment and never once asked for it."</blockquote>
+        <p class="q-attr">— Adult stepchild</p>
+      </div>
+
+      <div class="q-card">
+        <blockquote>"I named my daughter after my stepmom. She doesn't know yet. I'm telling her at Christmas."</blockquote>
+        <p class="q-attr">— Adult stepchild</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── For Stepdads ── -->
+  <section id="stepdads" class="sec">
+    <div class="w">
+      <p class="lbl">For stepdads</p>
+      <h2>Nearly every stepparenting resource was written for stepmoms.</h2>
+      <p>The books, the forums, the support groups — the default assumed stepparent is a woman. The emotional experience of stepdads is rarely acknowledged, let alone addressed directly.</p>
+      <p>StepStrong was built with stepdads in mind from the start. The quotes, the perspective cards, the research — none of it assumes your gender or your role in the household.</p>
+      <p>You don't have to do this alone and invisible.</p>
+    </div>
+  </section>
+
+  <!-- ── Privacy Trust ── -->
+  <section id="priv-trust" class="sec">
+    <div class="w">
+      <p class="lbl">Privacy</p>
+      <h2>We can't see your data.<br>Not because we deleted it — because we never had it.</h2>
+      <div class="priv-grid">
+        <div class="priv-card">
+          <strong>No account</strong>
+          <p>No email, no registration, no profile. Nothing to sign up for.</p>
+        </div>
+        <div class="priv-card">
+          <strong>No cloud</strong>
+          <p>Data stored locally on your device. It never leaves unless you export it.</p>
+        </div>
+        <div class="priv-card">
+          <strong>No tracking</strong>
+          <p>No analytics, no cookies, no advertising SDKs.</p>
+        </div>
+        <div class="priv-card">
+          <strong>Your control</strong>
+          <p>Export everything as a backup. Erase all data with one tap.</p>
+        </div>
+      </div>
+      <p class="priv-note">The only data that ever leaves your device is your subscription status if you upgrade to Premium — handled by RevenueCat, our payment processor. Your journal entries are never involved. <a href="#privacy-policy">Full privacy policy ↓</a></p>
+    </div>
+  </section>
+
+  <!-- ── Bottom CTA ── -->
+  <section id="bottom-cta" class="sec">
+    <div class="w">
+      <p class="lbl">Get started</p>
+      <h2>Free. No signup.<br>Two minutes to start.</h2>
+      <p class="sub">The next time they slam a door, you'll have somewhere to go that actually helps.</p>
+      <a href="#app" class="cta-btn">Try it free</a>
+      <div class="trust-row" style="justify-content: center;">
+        <span>No account needed</span>
+        <span>Data stays on your device</span>
+        <span>Available on iOS</span>
+      </div>
+      <p class="closing">The invisible effort is real.<br>StepStrong makes it visible.</p>
+    </div>
+  </section>
+
+  <!-- ── Privacy Policy ── -->
+  <section id="privacy-policy" class="sec">
+    <div class="w">
+      <p class="lbl">Legal</p>
+      <h2>Privacy Policy</h2>
+      <p class="pp-date">Last updated: February 2026</p>
+
+      <h3>What data the app stores</h3>
+      <p>StepStrong stores all your data locally on your device using IndexedDB. This includes interaction logs, profile settings, progress snapshots, and any photos you attach to entries. None of this data is transmitted to any server.</p>
+
+      <h3>Device backups</h3>
+      <p>StepStrong does not sync your data to any cloud service. Your data is not actively sent anywhere by the app. However, if you use your device's built-in backup feature (such as iCloud Backup on iOS or Google account backup on Android), your operating system may include app data in that backup as part of its normal backup behaviour. This is outside StepStrong's control and applies to most apps on your device.</p>
+
+      <h3>What data leaves your device</h3>
+      <p>The only data that leaves your device is related to in-app subscription purchases. When you subscribe to StepStrong Premium, your subscription status and an anonymous device identifier are sent to RevenueCat, our subscription management provider. This is used solely to verify and manage your subscription. RevenueCat does not receive any of your journal entries, profile information, or usage data.</p>
+      <p>You can read RevenueCat's privacy policy at <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">revenuecat.com/privacy</a>.</p>
+
+      <h3>No tracking</h3>
+      <p>StepStrong does not track you across other apps or websites. There are no analytics, no advertising SDKs, no crash reporting services, and no third-party data collection beyond the subscription management described above.</p>
+
+      <h3>No account required</h3>
+      <p>There is no account, no login, and no registration. Your data is not associated with your identity in any way.</p>
+
+      <h3>Photos</h3>
+      <p>Photos you attach to entries are resized and stored locally on your device as part of your entry data. They are never uploaded anywhere.</p>
+
+      <h3>Your control</h3>
+      <p>You can export all your data as a JSON file at any time from the Settings screen. You can permanently delete all data from Settings, or by deleting the app.</p>
+
+      <h3>Children</h3>
+      <p>StepStrong is not directed at children under 13 and does not knowingly collect any information from children.</p>
+
+      <h3>Changes to this policy</h3>
+      <p>If this policy changes materially, we will update the date at the top of this page.</p>
+
+      <h3>Contact</h3>
+      <p>Questions about this privacy policy: <a href="mailto:contact@example.com">contact@example.com</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="w-wide">
+    <div class="ftr-inner">
+      <p>&copy; 2026 StepStrong</p>
+      <p>
+        <a href="mailto:contact@example.com">contact@example.com</a>
+        <span style="margin: 0 8px; color: var(--border2);">·</span>
+        <a href="#privacy-policy">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
